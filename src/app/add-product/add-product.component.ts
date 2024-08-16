@@ -14,6 +14,13 @@ export class AddProductComponent implements OnInit {
   productForm!: FormGroup;
   imageSrc!: string;
 
+  /**
+   * 
+   * @param productService 
+   * @param snackbar 
+   * @param _data 
+   * @param dialogRef 
+   */
   constructor(
     private productService: ProductsService,
     private snackbar: MatSnackBar,
@@ -21,14 +28,23 @@ export class AddProductComponent implements OnInit {
     private dialogRef: MatDialogRef<AddProductComponent>
   ) { }
 
+  /**
+   * Getter for the data property.
+   */
   public get data(): Product {
     return this._data;
   }
 
+  /**
+   * Setter for the data property.
+   * @param {Product} d - The data to be set.
+   */
   public set data(d: Product) {
     this._data = d;
   }
-
+  /**
+   * Initializes the form.
+   */
   ngOnInit(): void {
     const hasData = this.data && Object.keys(this.data).length;
     this.productForm = new FormGroup({
@@ -39,7 +55,7 @@ export class AddProductComponent implements OnInit {
     });
   }
 
-  saveProduct() {
+  saveProduct(): void {
     const product = this.productForm.value as Product;
     if (Object.keys(this.data).length) {
       product.id = this.data.id;
